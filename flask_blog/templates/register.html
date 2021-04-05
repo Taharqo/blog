@@ -9,7 +9,7 @@
                     {{ form.username.label(class='form-control-label')}}
 
                     {% if form.username.errors %}
-                        {{ form.username(class='form-control form-control-lg is_invalid') 
+                        {{ form.username(class='form-control form-control-lg is_invalid') }} 
                         <div class='invalid-feedback'>
                             {% for error in form.username.errors %}
                                 <span>{{ error }}</span>
@@ -22,7 +22,17 @@
                 </div>
                 <div class='form-group'>
                     {{ form.email.label(class='form-control-label')}} <!--lable-->
-                    {{ form.email(class='form-control form-control-lg')}} <!--entry field-->
+                    {% if form.email.errors %}
+                        {{ form.email(class='form-control form-control-lg is_invalid') }}
+                        <div class='invalid-feedback'>
+                            {% for error in form.email.errors %}
+                                <span> {{ error }} </span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.email(class='form-control form-control-lg')}} <!--entry field-->
+                    {% endif %}
+                    
                 </div>
                 <div>
                     {{form.password.label(class='form-control-label')}}
@@ -41,7 +51,7 @@
 
     <div class='border-top pt-3'>
         <small class='text-muted'>
-            Already have an account? <a class='ml-2' href="{{ url_for('login')}}">Sign in</a> <!--login references the login function in flask_blog.py it doesnt reference ther route-->
+            Already have an account? <a class='ml-2' href="{{ url_for('login') }}">Sign in</a> <!--login references the login function in flask_blog.py it doesnt reference ther route-->
         </small>
 
     </div>
